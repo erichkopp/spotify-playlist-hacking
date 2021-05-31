@@ -8,7 +8,6 @@ os.system("clear")
 def get_track_uris(token):
     auth_headers = {"Authorization" : "Bearer " + token}
     offset = ["0", "50", "100"]
-
     uris = []
 
     for i in offset:
@@ -24,9 +23,7 @@ def get_track_uris(token):
         for i, val in enumerate(json_dict["items"]):
             uris.append(json_dict["items"][i]["track"]["uri"])
 
-    uris = uris[:126]
-
-    return uris
+    return uris[:126]
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -38,7 +35,11 @@ def add_to_playlist(token):
     payload = json.dumps({"uris": tracks_array})
     request_url = "https://api.spotify.com/v1/playlists/" + playlist_id + "/tracks"
 
-    response = requests.post(request_url, headers=auth_headers, data=payload)
+    response = requests.post(
+        request_url,
+        headers=auth_headers,
+        data=payload
+    )
 
     print(response.text)
 
